@@ -1,0 +1,26 @@
+<div class="col-md-6 user-container">
+    <h2 style="margin: auto"> Log Details</h2>
+    <button class="btn btn-danger" style="width:100px" (click)="addLog()"> Add Log</button>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="hidden">Id</th>
+        <th>Title</th>
+        <th>Detail</th>
+        <th>Level</th>
+        <th>Event</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let log of logs">
+        <td class="hidden">{{log.id}}</td>
+        <td>{{log.title}}</td>
+        <td>{{log.detail}}</td>
+        <td>{{log.level}}</td>
+        <td>{{log.event}}</td>
+        <td><button class="btn btn-success" (click)="deleteLog(log)"> Delete</button>
+          <button class="btn btn-success" (click)="editLog(log)" style="margin-left: 20px;"> Edit</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
