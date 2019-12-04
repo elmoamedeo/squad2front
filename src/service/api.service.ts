@@ -1,38 +1,91 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Log } from "../model/log.model";
-import { Observable } from "rxjs/index";
-import { ApiResponse } from "../model/api.response";
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Log } from '../model/log.model';
+import { User } from '../model/user.model';
+import { Observable, of } from "rxjs/index";
+import { catchError, tap } from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  response: { observe: 'response' }
+};
+
+const baseUrl = 'http://localhost:5000/api';
 
 @Injectable()
 export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl: string = 'http://localhost:8080/users/';
-
-  login(loginPayload) : Observable<ApiResponse> {
-    return this.http.post<ApiResponse>('http://localhost:8080/' + 'token/generate-token', loginPayload);
+  /* 
+    Token Jwt / Login
+  */
+  login(loginPayload): Observable<User> {
+    return this.http.post<User>('http://localhost:5000/' + 'token/generate-token', loginPayload);
   }
 
-  getLogs() : Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(this.baseUrl);
+  /* 
+    Get all Logs 
+  */
+  getLogs(): Observable<Log[]> {
+    return this.http.get<Log[]>(baseUrl)
+      .pipe(
+        tap(logs => console.log('Returned all logs.')),
+        catchError(this.handleError('getLogs', []))
+      );
   }
 
-  getLogById(id: number): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(this.baseUrl + id);
+  /*
+    Get Log by Id 
+  */
+  getLogById(id: number): Observable<Log> {
+    return this.http.get<Log>(baseUrl + id)
+      .pipe(
+        tap(_ => console.log('Returned Log by Id')),
+        catchError(this.handleError<Log>(`getLog by id=${id}`))
+      );
   }
 
-  createLog(log: Log): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.baseUrl, log);
+  /*
+    Create a new Log
+  */
+  createLog(log: Log): Observable<Log> {
+    return this.http.post<Log>(baseUrl, log, httpOptions)
+      .pipe(
+        tap((log: Log) => console.log(`Created new Log with id=${log._id}`)),
+        catchError(this.handleError<Log>('createLog'))
+      );
   }
 
-  updateLog(log: Log): Observable<ApiResponse> {
-    return this.http.put<ApiResponse>(this.baseUrl + log.id, log);
+  /*
+    Update Log
+  */
+  updateLog(id: number, log): Observable<any> {
+    return this.http.put<Log>(baseUrl + log._id, log, httpOptions)
+      .pipe(
+        tap(_ => console.log(`Updated log with id = ${id}`)),
+        catchError(this.handleError<any>('updateLog'))
+      );
   }
 
-  deleteLog(id: number): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(this.baseUrl + id);
+  /*
+    Delete Log
+  */
+  deleteLog(id: number): Observable<Log> {
+    return this.http.delete<Log>(baseUrl + id, httpOptions)
+      .pipe(
+        tap(_ => console.log(`Deleted Log with id = ${id}`)),
+        catchError(this.handleError<Log>('deleteLog'))
+      );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      console.error(error);
+
+      return of(result as T);
+    };
   }
 
 }

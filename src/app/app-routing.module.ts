@@ -8,7 +8,7 @@ import { LogEditComponent } from './log/log-edit/log-edit.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'list-log', component: LogComponent },
+  { path: 'logs', component: LogComponent},
   { path: 'edit-log', component: LogEditComponent },
   { path: 'log/:id', component: LogDetailComponent }
 ];

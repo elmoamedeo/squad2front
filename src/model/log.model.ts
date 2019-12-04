@@ -1,3 +1,3 @@
 export class Log {
-    id: number;
+    _id: number;
 }
