@@ -1,16 +1,16 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Log } from '../model/log.model';
-import { User } from '../model/user.model';
 import { Observable, of } from "rxjs/index";
 import { catchError, tap } from 'rxjs/operators';
+import { Log } from '../model/log.model';
+import { User } from '../model/user.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   response: { observe: 'response' }
 };
 
-const baseUrl = 'http://localhost:5000/api';
+const baseUrl = 'https://localhost:44341/api';
 
 @Injectable()
 export class ApiService {
@@ -21,7 +21,7 @@ export class ApiService {
     Token Jwt / Login
   */
   login(loginPayload): Observable<User> {
-    return this.http.post<User>('http://localhost:5000/' + 'token/generate-token', loginPayload);
+    return this.http.post<User>(baseUrl + 'token/generate-token', loginPayload, httpOptions);
   }
 
   /* 

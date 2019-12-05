@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   invalidLogin: boolean = false;
+
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) { }
 
   onSubmit() {
@@ -19,25 +20,16 @@ export class LoginComponent implements OnInit {
       return;
     }
     const loginPayload = {
-      username: this.loginForm.controls.username.value,
+      email: this.loginForm.controls.username.value,
       password: this.loginForm.controls.password.value
     }
-    this.apiService.login(loginPayload).subscribe(data => {
-      debugger;
-      if (data.status === 200) {
-        window.localStorage.setItem('token', data.result.token);
-        this.router.navigate(['log']);
-      } else {
-        this.invalidLogin = true;
-        alert(data.message);
-      }
-    });
+    this.apiService.login(loginPayload);
   }
 
   ngOnInit() {
     window.localStorage.removeItem('token');
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.compose([Validators.required])],
+      email: ['', Validators.compose([Validators.required])],
       password: ['', Validators.required]
     });
   }

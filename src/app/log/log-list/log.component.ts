@@ -21,12 +21,12 @@ export class LogComponent implements OnInit {
     }
     this.apiService.getLogs()
       .subscribe(data => {
-        this.logs = data.result;
+        this.logs = data;
       });
   }
 
   deleteLog(log: Log): void {
-    this.apiService.deleteLog(log.id)
+    this.apiService.deleteLog(log._id)
       .subscribe( data => {
         this.logs = this.logs.filter(u => u !== log);
       })
@@ -34,7 +34,7 @@ export class LogComponent implements OnInit {
 
   editLog(log: Log): void {
     window.localStorage.removeItem("editLogId");
-    window.localStorage.setItem("editLogId", log.id.toString());
+    window.localStorage.setItem("editLogId", log._id.toString());
     this.router.navigate(['edit-log']);
   };
 
