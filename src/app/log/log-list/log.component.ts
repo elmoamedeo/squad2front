@@ -15,7 +15,7 @@ export class LogComponent implements OnInit {
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
-    if (!window.localStorage.getItem('token')) {
+    if (!window.localStorage.getItem('accessToken')) {
       this.router.navigate(['login']);
       return;
     }

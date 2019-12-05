@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
     }
     this.apiService.login(loginPayload).subscribe(res => {
       const token = res['accessToken'];
+      window.localStorage.setItem('accessToken', token);
       this.router.navigate(['/logs']);
     }, (err) => {
       console.log(err);
