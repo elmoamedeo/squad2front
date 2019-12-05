@@ -20,10 +20,15 @@ export class LoginComponent implements OnInit {
       return;
     }
     const loginPayload = {
-      email: this.loginForm.controls.username.value,
+      email: this.loginForm.controls.email.value,
       password: this.loginForm.controls.password.value
     }
-    this.apiService.login(loginPayload);
+    this.apiService.login(loginPayload).subscribe(res => {
+      const token = res['accessToken'];
+      this.router.navigate(['/logs']);
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   ngOnInit() {

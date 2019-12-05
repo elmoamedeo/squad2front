@@ -21,7 +21,7 @@ export class ApiService {
     Token Jwt / Login
   */
   login(loginPayload): Observable<User> {
-    return this.http.post<User>(baseUrl + 'token/generate-token', loginPayload, httpOptions);
+    return this.http.post<User>(baseUrl + '/Login', loginPayload);
   }
 
   /* 

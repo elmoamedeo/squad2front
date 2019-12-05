@@ -20,8 +20,8 @@ export class LogComponent implements OnInit {
       return;
     }
     this.apiService.getLogs()
-      .subscribe(data => {
-        this.logs = data;
+      .subscribe(res => {
+        this.logs = res;
       });
   }
 
