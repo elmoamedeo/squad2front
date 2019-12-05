@@ -5,8 +5,10 @@ import { catchError, tap } from 'rxjs/operators';
 import { Log } from '../model/log.model';
 import { User } from '../model/user.model';
 
+let token = 'Bearer ' + localStorage.getItem("accessToken");
+
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token }),
   response: { observe: 'response' }
 };
 
@@ -28,7 +30,8 @@ export class ApiService {
     Get all Logs 
   */
   getLogs(): Observable<Log[]> {
-    return this.http.get<Log[]>(baseUrl)
+    console.log(token);
+    return this.http.get<Log[]>(baseUrl + '/logs', httpOptions)
       .pipe(
         tap(logs => console.log('Returned all logs.')),
         catchError(this.handleError('getLogs', []))
@@ -39,7 +42,7 @@ export class ApiService {
     Get Log by Id 
   */
   getLogById(id: number): Observable<Log> {
-    return this.http.get<Log>(baseUrl + id)
+    return this.http.get<Log>(baseUrl + id, httpOptions)
       .pipe(
         tap(_ => console.log('Returned Log by Id')),
         catchError(this.handleError<Log>(`getLog by id=${id}`))
