@@ -1,6 +1,7 @@
 <div class="col-md-6 user-container">
-    <h2 class="text-center">Edit Log</h2>
-    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <h2 [hidden]="log._id" class="text-center">Create Log</h2>
+    <h2 [hidden]="!log._id" class="text-center">Edit Log</h2>
+    <form [formGroup]="editLogForm" (ngSubmit)="onSubmit()">
 
       <div class="hidden">
         <input type="text" formControlName="id" placeholder="id" name="id" class="form-control" id="id">
@@ -13,22 +14,34 @@
   
       <div class="form-group">
         <label for="firstName">Detail:</label>
-        <input formControlName="detail" placeholder="Details of the log" name="detail" class="form-control" id="detail">
+        <input type="textarea" formControlName="detail" placeholder="Details of the log" name="detail" class="form-control" id="detail">
       </div>
   
       <div class="form-group">
-        <label for="lastName">Event:</label>
-        <input formControlName="event" placeholder="Last name" name="lastName" class="form-control" id="lastName">
+        <label for="event">Event:</label>
+        <input formControlName="event" type="radio" name="event" value="0"/>
+        <input formControlName="event" type="radio" name="event" value="1"/>
+        <input formControlName="event" type="radio" name="event" value="2"/>
       </div>
   
       <div class="form-group">
-        <label for="age">Age:</label>
-        <input type="number" formControlName="age" placeholder="age" name="age" class="form-control" id="age">
+        <label for="level">Level:</label>
+        <input type="text" formControlName="level" placeholder="Level" name="level" class="form-control" id="level">
       </div>
   
       <div class="form-group">
-        <label for="salary">Salary:</label>
-        <input type="number" formControlName="salary" placeholder="salary" name="salary" class="form-control" id="salary">
+        <label for="environment">Environment:</label>
+        <input type="text" formControlName="environment" placeholder="Environment" name="environment" class="form-control" id="environment">
+      </div>
+
+      <div class="form-group">
+        <label for="enabled">Active?</label>
+        <input type="checkbox" formControlName="enabled" name="enabled" class="form-control" id="enabled">
+      </div>
+
+      <div class="form-group">
+        <label for="ip">Ip:</label>
+        <input type="text" formControlName="ip" name="ip" placeholder="192.168.0.1" class="form-control" id="ip">
       </div>
   
       <button class="btn btn-success">Update</button>

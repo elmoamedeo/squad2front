@@ -13,17 +13,20 @@ import { first } from "rxjs/operators";
 export class LogEditComponent implements OnInit {
 
   log: Log;
-  editForm: FormGroup;
+  editLogForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
-    let userId = window.localStorage.getItem("editLogId");
-    if (userId) {
-      this.editForm.get('id').disable();
+    let logId = window.localStorage.getItem("editLogId");
+    if (logId) {
+      this.apiService.getLogById(+logId)
+        .subscribe(data => {
+          this.editLogForm.setValue(data);
+        });
     }
-    this.editForm = this.formBuilder.group({
-      id: [''],
+    this.editLogForm = this.formBuilder.group({
+      id: [null],
       title: ['', Validators.required],
       detail: ['', Validators.required],
       event: ['', Validators.required],
@@ -32,23 +35,35 @@ export class LogEditComponent implements OnInit {
       enabled: ['', Validators.required],
       ip: ['', Validators.required]
     });
-    this.apiService.getLogById(+userId)
-      .subscribe(data => {
-        this.editForm.setValue(data);
-      });
+
+    this.editLogForm.get('id').disable();
   }
 
   onSubmit() {
-    this.apiService.updateLog(this.editForm.get('id').value, this.editForm.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          alert('Log updated successfully.');
-          this.router.navigate(['list-log']);
-        },
-        error => {
-          alert(error);
-        });
+    if (this.editLogForm.get('id').value != null) {
+      this.apiService.updateLog(this.editLogForm.get('id').value, this.editLogForm.value)
+        .pipe(first())
+        .subscribe(
+          res => {
+            alert('Log updated successfully.');
+            this.router.navigate(['list-log']);
+          },
+          error => {
+            alert(error);
+          });
+    } else {
+      this.apiService.createLog(this.editLogForm.value)
+        .pipe()
+        .subscribe(
+          res => {
+            alert('Log created successfully.');
+            this.router.navigate(['list-log']);
+          },
+          error => {
+            alert(error);
+          }
+        )
+    }
   }
 
 }

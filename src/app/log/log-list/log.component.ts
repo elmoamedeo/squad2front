@@ -33,12 +33,12 @@ export class LogComponent implements OnInit {
   };
 
   editLog(log: Log): void {
-    window.localStorage.removeItem("editLogId");
-    window.localStorage.setItem("editLogId", log._id.toString());
-    this.router.navigate(['edit-log']);
-  };
-
-  addUser(): void {
-    this.router.navigate(['add-user']);
+    if(log != undefined) {
+      window.localStorage.removeItem("editLogId");
+      window.localStorage.setItem("editLogId", log._id.toString());
+      this.router.navigate(['edit-log']);
+    } else {
+      this.router.navigate(['edit-log']);
+    }
   };
 }

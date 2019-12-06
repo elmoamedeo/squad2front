@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from "rxjs/index";
-import { catchError, tap } from 'rxjs/operators';
+import { Observable, of, BehaviorSubject } from "rxjs/index";
+import { catchError, tap, map } from 'rxjs/operators';
 import { Log } from '../model/log.model';
 import { User } from '../model/user.model';
 
@@ -17,13 +17,24 @@ const baseUrl = 'https://localhost:44341/api';
 @Injectable()
 export class ApiService {
 
+  private currentUserSubject = new BehaviorSubject<any>(null);
+
+  user: User;
+
   constructor(private http: HttpClient) { }
 
   /* 
     Token Jwt / Login
   */
-  login(loginPayload): Observable<User> {
-    return this.http.post<User>(baseUrl + '/Login', loginPayload);
+  login(loginPayload): Observable<any> {
+    return this.http.post<User>(baseUrl + '/Login', loginPayload)
+      .pipe(map(userInfo => {
+        localStorage.setItem('accessToken', userInfo.accessToken);
+
+        this.currentUserSubject.next(userInfo);
+
+        return userInfo;
+      }));
   }
 
   /* 
@@ -63,7 +74,7 @@ export class ApiService {
   /*
     Update Log
   */
-  updateLog(id: number, log): Observable<any> {
+  updateLog(id: number, log: Log): Observable<any> {
     return this.http.put<Log>(baseUrl + log._id, log, httpOptions)
       .pipe(
         tap(_ => console.log(`Updated log with id = ${id}`)),
@@ -74,7 +85,7 @@ export class ApiService {
   /*
     Delete Log
   */
-  deleteLog(id: number): Observable<Log> {
+  deleteLog(id): Observable<Log> {
     return this.http.delete<Log>(baseUrl + id, httpOptions)
       .pipe(
         tap(_ => console.log(`Deleted Log with id = ${id}`)),
@@ -89,6 +100,10 @@ export class ApiService {
 
       return of(result as T);
     };
+  }
+
+  public getCurrentUser(): Observable<any> {
+    return this.currentUserSubject.asObservable();
   }
 
 }
