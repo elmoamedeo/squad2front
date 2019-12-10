@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,6 +13,10 @@ import { LogComponent } from './log/log-list/log.component';
 import { LoginComponent } from './login/login.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { ApiService } from 'src/service/api.service';
+import { AuthenticationService } from 'src/service/authentication.service';
+import { LogService } from 'src/service/log.service';
+import { UserService } from 'src/service/user.service';
+import { JwtInterceptor } from 'src/_helpers/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,13 @@ import { ApiService } from 'src/service/api.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ApiService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    ApiService,
+    AuthenticationService,
+    LogService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

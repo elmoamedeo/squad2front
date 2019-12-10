@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Log } from "../../../model/log.model";
 import { ApiService } from '../../../service/api.service';
+import { LogService } from 'src/service/log.service';
 
 @Component({
   selector: 'app-log',
@@ -12,21 +13,20 @@ export class LogComponent implements OnInit {
 
   logs: Log[];
 
-  constructor(private router: Router, private apiService: ApiService) { }
+  constructor(
+    private router: Router, 
+    private apiService: ApiService,
+    private logService: LogService) { }
 
   ngOnInit() {
-    if (!window.localStorage.getItem('accessToken')) {
-      this.router.navigate(['login']);
-      return;
-    }
-    this.apiService.getLogs()
+    this.logService.getLogs()
       .subscribe(res => {
         this.logs = res;
       });
   }
 
   deleteLog(log: Log): void {
-    this.apiService.deleteLog(log._id)
+    this.logService.deleteLog(log._id)
       .subscribe( data => {
         this.logs = this.logs.filter(u => u !== log);
       })

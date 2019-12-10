@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../../service/api.service';
+import { AuthenticationService } from 'src/service/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -13,19 +14,17 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   invalidLogin: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private apiService: ApiService) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private router: Router, 
+    private apiService: ApiService, 
+    private authenticationService: AuthenticationService) { }
 
   onSubmit() {
     if (this.loginForm.invalid) {
       return;
     }
-    const loginPayload = {
-      email: this.loginForm.controls.email.value,
-      password: this.loginForm.controls.password.value
-    }
-    this.apiService.login(loginPayload).subscribe(res => {
-      const token = res['accessToken'];
-      window.localStorage.setItem('accessToken', token);
+    this.authenticationService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value).subscribe(res => {
       this.router.navigate(['/logs']);
     }, (err) => {
       console.log(err);
