@@ -35,7 +35,7 @@ export class LogComponent implements OnInit {
   editLog(log: Log): void {
     if(log != undefined) {
       window.localStorage.removeItem("editLogId");
-      window.localStorage.setItem("editLogId", log._id.toString());
+      window.localStorage.setItem("editLogId", log._id);
       this.router.navigate(['edit-log']);
     } else {
       this.router.navigate(['edit-log']);

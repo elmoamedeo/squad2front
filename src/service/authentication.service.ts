@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { User } from '../model/user.model';
 
-const baseUrl = 'https://localhost:44341/api';
+const baseUrl = 'https://centralerros-api.herokuapp.com/api';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -32,6 +32,7 @@ export class AuthenticationService {
     }
 
     logout() {
+        
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }

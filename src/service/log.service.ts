@@ -10,7 +10,7 @@ const httpOptions = {
     response: { observe: 'response' }
 }; */
   
-const baseUrl = 'https://localhost:44341/api';
+const baseUrl = 'https://centralerros-api.herokuapp.com/api';
 
 @Injectable()
 export class LogService {

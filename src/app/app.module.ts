@@ -17,6 +17,7 @@ import { AuthenticationService } from 'src/service/authentication.service';
 import { LogService } from 'src/service/log.service';
 import { UserService } from 'src/service/user.service';
 import { JwtInterceptor } from 'src/_helpers/jwt.interceptor';
+import { ErrorInterceptor } from 'src/_helpers/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,9 @@ import { JwtInterceptor } from 'src/_helpers/jwt.interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    
+    // Services
     ApiService,
     AuthenticationService,
     LogService,
