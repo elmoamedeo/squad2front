@@ -1,49 +1,83 @@
-<div class="col-md-6 user-container">
-    <h2 [hidden]="log._id" class="text-center">Create Log</h2>
-    <h2 [hidden]="!log._id" class="text-center">Edit Log</h2>
-    <form [formGroup]="editLogForm" (ngSubmit)="onSubmit()">
+<div class="row">
+  <div class="col">
+    <div class="card bg-dark mt-5">
+      <h2 class="card-header text-light font-weight-light mt-2 mb-2">
+        <span [hidden]="log._id" class="text-center">Create Log</span>
+        <span [hidden]="!log._id" class="text-center">Edit Log</span>
+      </h2>
 
-      <div class="hidden">
-        <input type="text" formControlName="id" placeholder="id" name="id" class="form-control" id="id">
-      </div>
+      <div class="card-body">
+        <form [formGroup]="editLogForm" (ngSubmit)="onSubmit()">
 
-      <div class="form-group">
-        <label for="title">Title:</label>
-        <input type="text" formControlName="title" placeholder="Title" name="title" class="form-control" id="title">
-      </div>
-  
-      <div class="form-group">
-        <label for="firstName">Detail:</label>
-        <input type="textarea" formControlName="detail" placeholder="Details of the log" name="detail" class="form-control" id="detail">
-      </div>
-  
-      <div class="form-group">
-        <label for="event">Event:</label>
-        <input formControlName="event" type="radio" name="event" value="0"/>
-        <input formControlName="event" type="radio" name="event" value="1"/>
-        <input formControlName="event" type="radio" name="event" value="2"/>
-      </div>
-  
-      <div class="form-group">
-        <label for="level">Level:</label>
-        <input type="text" formControlName="level" placeholder="Level" name="level" class="form-control" id="level">
-      </div>
-  
-      <div class="form-group">
-        <label for="environment">Environment:</label>
-        <input type="text" formControlName="environment" placeholder="Environment" name="environment" class="form-control" id="environment">
-      </div>
+          <div class="row">
+            <div class="col-md-6">
 
-      <div class="form-group">
-        <label for="enabled">Active?</label>
-        <input type="checkbox" formControlName="enabled" name="enabled" class="form-control" id="enabled">
-      </div>
+              <div class="form-group">
+                <label for="detail">ID</label>
+                <input type="text" formControlName="id" placeholder="id" name="id" class="form-control" id="id">
+              </div>
 
-      <div class="form-group">
-        <label for="ip">Ip:</label>
-        <input type="text" formControlName="ip" name="ip" placeholder="192.168.0.1" class="form-control" id="ip">
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" formControlName="title" placeholder="Title" name="title" class="form-control" id="title">
+              </div>
+
+              <div class="form-group">
+                <label for="detail">Detail</label>
+                <input type="textarea" formControlName="detail" placeholder="Details of the log" name="detail" class="form-control" id="detail">
+              </div>
+
+              <div class="form-group">
+                <label>Evente</label>
+                <br/>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input formControlName="event" type="radio" id="event0" name="event" class="custom-control-input" value="0">
+                  <label class="custom-control-label" for="event0">0</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input formControlName="event" type="radio" id="event2" name="event" class="custom-control-input" value="1">
+                  <label class="custom-control-label" for="event2">1</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input formControlName="event" type="radio" id="event3" name="event" class="custom-control-input " value="2">
+                  <label class="custom-control-label" for="event3">2</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="level">Level</label>
+                <input type="text" formControlName="level" placeholder="Level" name="level" class="form-control" id="level">
+              </div>
+
+              <div class="form-group">
+                <label for="environment">Environment</label>
+                <input type="text" formControlName="environment" placeholder="Environment" name="environment" class="form-control" id="environment">
+              </div>
+
+              <div class="form-group">
+                <label for="ip">IP</label>
+                <input type="text" formControlName="ip" name="ip" placeholder="192.168.0.1" class="form-control" id="ip">
+              </div>
+
+              <div class="form-group">
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input formControlName="event" type="checkbox" id="enabled" name="enabled" class="custom-control-input" value="0">
+                  <label class="custom-control-label" for="enabled">Active?</label>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </form>
+
+        <div class="mt-5">
+          <button class="btn btn-outline-success btn-lg">Update</button>
+        </div>
+
       </div>
-  
-      <button class="btn btn-success">Update</button>
-    </form>
+    </div>
   </div>
+</div>

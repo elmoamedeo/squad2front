@@ -1,30 +1,32 @@
 <div class="row justify-content-center" style="padding-top: 5%">
-        <div class="col-5">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">Create a new Account</h3>
-                    <form [formGroup]="userEditForm" (ngSubmit)="onSubmit()">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control" formControlName="email" id="email" autocomplete="off">
-                            <div class="error"
-                                *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched">
-                                Email is required.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Password</label>
-                            <input type="password" class="form-control" formControlName="password" id="pwd"
-                                autocomplete="off">
-                            <div class="error"
-                                *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">
-                                Password is required.</div>
-                        </div>
-                        <button class="btn btn-success" [disabled]="loginForm.invalid">Login</button>
-                        <div *ngIf="invalidLogin" class="error">
-                            <div>Invalid credentials.</div>
-                        </div>
-                    </form>
-                </div>
+  <div class="col-5">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">Create a new Account</h3>
+        <form [formGroup]="userEditForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" formControlName="email" id="email" autocomplete="off">
+            <div class="error"
+                 *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched">
+              Email is required.
             </div>
-        </div>
+          </div>
+          <div class="form-group">
+            <label for="pwd">Password</label>
+            <input type="password" class="form-control" formControlName="password" id="pwd"
+                   autocomplete="off">
+            <div class="error"
+                 *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">
+              Password is required.
+            </div>
+          </div>
+          <button class="btn btn-success" [disabled]="loginForm.invalid">Login</button>
+          <div *ngIf="invalidLogin" class="error">
+            <div>Invalid credentials.</div>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
+</div>
