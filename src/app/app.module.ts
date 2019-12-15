@@ -12,7 +12,6 @@ import { LogEditComponent } from './log/log-edit/log-edit.component';
 import { LogComponent } from './log/log-list/log.component';
 import { LoginComponent } from './login/login.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
-import { ApiService } from 'src/service/api.service';
 import { AuthenticationService } from 'src/service/authentication.service';
 import { LogService } from 'src/service/log.service';
 import { UserService } from 'src/service/user.service';
@@ -43,7 +42,6 @@ import { ErrorInterceptor } from 'src/_helpers/error.interceptor';
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     
     // Services
-    ApiService,
     AuthenticationService,
     LogService,
     UserService

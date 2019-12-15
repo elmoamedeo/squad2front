@@ -3,5 +3,6 @@ export class User {
     email: string;
     password: string;
     accessToken: string;
+    active: boolean;
     role: string;
 }

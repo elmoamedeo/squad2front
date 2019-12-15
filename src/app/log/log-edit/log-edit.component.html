@@ -2,8 +2,8 @@
   <div class="col">
     <div class="card bg-dark mt-5">
       <h2 class="card-header text-light font-weight-light mt-2 mb-2">
-        <span [hidden]="log._id" class="text-center">Create Log</span>
-        <span [hidden]="!log._id" class="text-center">Edit Log</span>
+        <span [hidden]="edit" class="text-center">Create Log</span>
+        <span [hidden]="!edit" class="text-center">Edit Log</span>
       </h2>
 
       <div class="card-body">
@@ -28,7 +28,7 @@
               </div>
 
               <div class="form-group">
-                <label>Evente</label>
+                <label>Event</label>
                 <br/>
                 <div class="custom-control custom-radio custom-control-inline">
                   <input formControlName="event" type="radio" id="event0" name="event" class="custom-control-input" value="0">
@@ -74,7 +74,8 @@
         </form>
 
         <div class="mt-5">
-          <button class="btn btn-outline-success btn-lg">Update</button>
+          <button class="btn btn-outline-success btn-lg" [hidden]="edit" (click)="onSubmit()">Create</button>
+          <button class="btn btn-outline-success btn-lg" [hidden]="!edit" (click)="onSubmit()">Update</button>
         </div>
 
       </div>

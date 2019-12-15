@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Log } from 'src/model/log.model';
+import { ILog, Log } from 'src/model/log.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ApiService } from 'src/service/api.service';
-import { Router } from '@angular/router';
-import { first } from "rxjs/operators";
+import { Router, ActivatedRoute } from '@angular/router';
 import { LogService } from 'src/service/log.service';
+import { AuthenticationService } from 'src/service/authentication.service';
 
 @Component({
   selector: 'app-log-edit',
@@ -13,23 +12,24 @@ import { LogService } from 'src/service/log.service';
 })
 export class LogEditComponent implements OnInit {
 
-  log: Log;
+  log: ILog;
+  currentUserId = localStorage.getItem('currentUserId').slice(1, -1);
+  user;
+  edit;
   editLogForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder, 
-    private router: Router, 
-    private apiService: ApiService,
-    private logService: LogService) { }
+    private router: Router,
+    private route: ActivatedRoute,
+    private logService: LogService,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-    let logId = window.localStorage.getItem("editLogId");
-    if (logId) {
-      this.logService.getLogById(+logId)
-        .subscribe(data => {
-          this.editLogForm.setValue(data);
-        });
-    }
+    this.edit = false;
+
+    this.getLog(this.route.snapshot.params['id']);
+
     this.editLogForm = this.formBuilder.group({
       id: [null],
       title: ['', Validators.required],
@@ -42,44 +42,62 @@ export class LogEditComponent implements OnInit {
     });
 
     this.editLogForm.get('id').disable();
+    this.user = this.authenticationService.currentUserValue
   }
 
-  createLog() {
-    return (
-      this.log.title = this.editLogForm.get('title').value,
-      this.log.detail = this.editLogForm.get('detail').value,
-      this.log.event = this.editLogForm.get('event').value,
-      this.log.level = this.editLogForm.get('level').value,
-      this.log.environment = this.editLogForm.get('environment').value,
-      this.log.enabled = this.editLogForm.get('enabled').value,
-      this.log.ip = this.editLogForm.get('ip').value
-    )
+  private updateForm(log: ILog) {
+    this.editLogForm.patchValue({
+      id: log.id,
+      title: log.title,
+      detail: log.detail,
+      event: log.event,
+      level: log.level,
+      environment: log.environment,
+      enabled: log.enabled,
+      ip: log.ip
+    })
+  }
+
+  private createFromForm(): ILog {
+    return {
+      ...new Log(),
+      id: this.editLogForm.get('id').value,
+      title: this.editLogForm.get('title').value,
+      detail: this.editLogForm.get('detail').value,
+      event: this.editLogForm.get('event').value,
+      level: this.editLogForm.get('level').value,
+      environment: this.editLogForm.get('environment').value,
+      enabled: this.editLogForm.get('enabled').value,
+      ip: this.editLogForm.get('ip').value,
+      token: this.currentUserId
+    };
+  }
+
+  getLog(id: string) {
+    if(id != 'new') {
+      this.logService.getLogById(id)
+        .subscribe(data => {
+          this.updateForm(data);
+      });
+
+      this.edit = true;
+    }
+    this.edit = false;
   }
 
   onSubmit() {
     if (this.editLogForm.get('id').value != null) {
-      this.logService.updateLog(this.editLogForm.get('id').value, this.createLog())
-        .pipe(first())
+      this.logService.updateLog(this.editLogForm.get('id').value, this.createFromForm())
         .subscribe(
           res => {
-            alert('Log updated successfully.');
-            this.router.navigate(['list-log']);
-          },
-          error => {
-            alert(error);
-          });
+            this.router.navigate(['logs']);
+        });
     } else {
       this.logService.createLog(this.editLogForm.value)
-        .pipe()
         .subscribe(
           res => {
-            alert('Log created successfully.');
-            this.router.navigate(['list-log']);
-          },
-          error => {
-            alert(error);
-          }
-        )
+            this.router.navigate(['logs']);
+        });
     }
   }
 

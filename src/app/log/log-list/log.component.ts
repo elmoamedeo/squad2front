@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Log } from "../../../model/log.model";
-import { ApiService } from '../../../service/api.service';
 import { LogService } from 'src/service/log.service';
 
 @Component({
@@ -14,8 +13,7 @@ export class LogComponent implements OnInit {
   logs: Log[];
 
   constructor(
-    private router: Router, 
-    private apiService: ApiService,
+    private router: Router,
     private logService: LogService) { }
 
   ngOnInit() {
@@ -33,12 +31,12 @@ export class LogComponent implements OnInit {
   };
 
   editLog(log: Log): void {
-    if(log != undefined) {
       window.localStorage.removeItem("editLogId");
       window.localStorage.setItem("editLogId", log.id);
       this.router.navigate(['edit-log']);
-    } else {
-      this.router.navigate(['edit-log']);
-    }
   };
+
+  goToAddLog(){
+    this.router.navigate(['edit-log/new']);
+  }
 }

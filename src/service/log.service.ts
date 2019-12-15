@@ -3,12 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Log } from 'src/model/log.model';
 import { tap, catchError } from 'rxjs/operators';
-
-/*
-const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-    response: { observe: 'response' }
-}; */
   
 const baseUrl = 'https://centralerros-api.herokuapp.com/api';
 
@@ -21,9 +15,7 @@ export class LogService {
         Get all Logs 
     */
     getLogs(): Observable<Log[]> {
-        return this.http.get<Log[]>(baseUrl + '/logs'
-        //, httpOptions
-        )
+        return this.http.get<Log[]>(baseUrl + '/logs')
             .pipe(
                 tap(logs => console.log('Returned all logs.')),
                 catchError(this.handleError('getLogs', []))
@@ -33,10 +25,8 @@ export class LogService {
     /*
         Get Log by Id 
     */
-    getLogById(id: number): Observable<Log> {
-        return this.http.get<Log>(baseUrl + id
-            //, httpOptions
-            )
+    getLogById(id: string): Observable<Log> {
+        return this.http.get<Log>(baseUrl + '/logs/' + id)
             .pipe(
                 tap(_ => console.log('Returned Log by Id')),
                 catchError(this.handleError<Log>(`getLog by id=${id}`))
@@ -47,9 +37,7 @@ export class LogService {
         Create a new Log
     */
     createLog(log: Log): Observable<Log> {
-        return this.http.post<Log>(baseUrl, log
-            //, httpOptions
-            )
+        return this.http.post<Log>(baseUrl + '/logs', log)
             .pipe(
                 tap((log: Log) => console.log(`Created new Log with id=${log.id}`)),
                 catchError(this.handleError<Log>('createLog'))
@@ -59,10 +47,8 @@ export class LogService {
     /*
         Update Log
     */
-    updateLog(id: number, log: Log): Observable<any> {
-        return this.http.put<Log>(baseUrl + log.id, log
-            //, httpOptions
-            )
+    updateLog(id: string, log: Log): Observable<any> {
+        return this.http.put<Log>(baseUrl + '/logs/' + id, log)
             .pipe(
                 tap(_ => console.log(`Updated log with id = ${id}`)),
                 catchError(this.handleError<any>('updateLog'))
@@ -73,9 +59,7 @@ export class LogService {
         Delete Log
     */
     deleteLog(id: string): Observable<Log> {
-        return this.http.delete<Log>(baseUrl + '/logs/' + id
-            //, httpOptions
-            )
+        return this.http.delete<Log>(baseUrl + '/logs/' + id)
             .pipe(
                 tap(_ => console.log(`Deleted Log with id = ${id}`)),
                 catchError(this.handleError<Log>('deleteLog'))

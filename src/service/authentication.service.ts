@@ -23,16 +23,16 @@ export class AuthenticationService {
     }
 
     login(email, password) {
-        return this.http.post<any>(`${baseUrl}/Login`, { email, password })
+        return this.http.post<User>(`${baseUrl}/Login`, { email, password })
             .pipe(map(user => {
                 localStorage.setItem('currentUser', JSON.stringify(user));
+                localStorage.setItem('currentUserId', JSON.stringify(user.id));
                 this.currentUserSubject.next(user);
                 return user;
             }));
     }
 
     logout() {
-        
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
