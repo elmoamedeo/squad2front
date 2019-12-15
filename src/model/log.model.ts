@@ -8,7 +8,6 @@ export class Log {
     level: string;
     environment: string;
     enabled: boolean;
-    createdAt: Date;
     ip: string;
     user: User;
 }

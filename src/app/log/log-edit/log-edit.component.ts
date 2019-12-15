@@ -44,22 +44,21 @@ export class LogEditComponent implements OnInit {
     this.editLogForm.get('id').disable();
   }
 
-  createLog(log: Log) {
+  createLog() {
     return (
-      log.title = this.editLogForm.get('title').value,
-      log.detail = this.editLogForm.get('detail').value,
-      log.event = this.editLogForm.get('event').value,
-      log.level = this.editLogForm.get('level').value,
-      log.environment = this.editLogForm.get('environment').value,
-      log.enabled = this.editLogForm.get('enabled').value,
-      log.ip = this.editLogForm.get('ip').value,
-      log.createdAt = new Date()
+      this.log.title = this.editLogForm.get('title').value,
+      this.log.detail = this.editLogForm.get('detail').value,
+      this.log.event = this.editLogForm.get('event').value,
+      this.log.level = this.editLogForm.get('level').value,
+      this.log.environment = this.editLogForm.get('environment').value,
+      this.log.enabled = this.editLogForm.get('enabled').value,
+      this.log.ip = this.editLogForm.get('ip').value
     )
   }
 
   onSubmit() {
     if (this.editLogForm.get('id').value != null) {
-      this.logService.updateLog(this.editLogForm.get('id').value, this.editLogForm.value)
+      this.logService.updateLog(this.editLogForm.get('id').value, this.createLog())
         .pipe(first())
         .subscribe(
           res => {
