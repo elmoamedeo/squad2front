@@ -1,7 +1,7 @@
 import { User } from './user.model';
 
 export class Log {
-    _id: string;
+    id: string;
     title: string;
     detail: string;
     event: number;

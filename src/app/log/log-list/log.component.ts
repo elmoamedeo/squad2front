@@ -26,7 +26,7 @@ export class LogComponent implements OnInit {
   }
 
   deleteLog(log: Log): void {
-    this.logService.deleteLog(log._id)
+    this.logService.deleteLog(log.id)
       .subscribe( data => {
         this.logs = this.logs.filter(u => u !== log);
       })
@@ -35,7 +35,7 @@ export class LogComponent implements OnInit {
   editLog(log: Log): void {
     if(log != undefined) {
       window.localStorage.removeItem("editLogId");
-      window.localStorage.setItem("editLogId", log._id);
+      window.localStorage.setItem("editLogId", log.id);
       this.router.navigate(['edit-log']);
     } else {
       this.router.navigate(['edit-log']);

@@ -51,7 +51,7 @@ export class LogService {
             //, httpOptions
             )
             .pipe(
-                tap((log: Log) => console.log(`Created new Log with id=${log._id}`)),
+                tap((log: Log) => console.log(`Created new Log with id=${log.id}`)),
                 catchError(this.handleError<Log>('createLog'))
             );
     }
@@ -60,7 +60,7 @@ export class LogService {
         Update Log
     */
     updateLog(id: number, log: Log): Observable<any> {
-        return this.http.put<Log>(baseUrl + log._id, log
+        return this.http.put<Log>(baseUrl + log.id, log
             //, httpOptions
             )
             .pipe(
@@ -72,8 +72,8 @@ export class LogService {
     /*
         Delete Log
     */
-    deleteLog(id): Observable<Log> {
-        return this.http.delete<Log>(baseUrl + id
+    deleteLog(id: string): Observable<Log> {
+        return this.http.delete<Log>(baseUrl + '/logs/' + id
             //, httpOptions
             )
             .pipe(
