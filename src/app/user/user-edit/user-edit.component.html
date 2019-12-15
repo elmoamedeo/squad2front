@@ -3,12 +3,12 @@
     <div class="card">
       <div class="card-body">
         <h3 class="card-title">Create a new Account</h3>
-        <form [formGroup]="userEditForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="userEditForm">
           <div class="form-group">
             <label for="email">Email</label>
             <input type="text" class="form-control" formControlName="email" id="email" autocomplete="off">
             <div class="error"
-                 *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched">
+                 *ngIf="userEditForm.controls['email'].hasError('required') && userEditForm.controls['email'].touched">
               Email is required.
             </div>
           </div>
@@ -17,12 +17,12 @@
             <input type="password" class="form-control" formControlName="password" id="pwd"
                    autocomplete="off">
             <div class="error"
-                 *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">
+                 *ngIf="userEditForm.controls['password'].hasError('required') && userEditForm.controls['password'].touched">
               Password is required.
             </div>
           </div>
-          <button class="btn btn-success" [disabled]="loginForm.invalid">Login</button>
-          <div *ngIf="invalidLogin" class="error">
+          <button class="btn btn-success" [disabled]="userEditForm.invalid">Login</button>
+          <div class="error">
             <div>Invalid credentials.</div>
           </div>
         </form>
