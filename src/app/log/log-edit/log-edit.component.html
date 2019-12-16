@@ -5,46 +5,27 @@
         <span [hidden]="edit" class="text-center">Create Log</span>
         <span [hidden]="!edit" class="text-center">Edit Log</span>
       </h2>
-
       <div class="card-body">
         <form [formGroup]="editLogForm" (ngSubmit)="onSubmit()">
-
           <div class="row">
             <div class="col-md-6">
-
               <div class="form-group">
                 <label for="detail">ID</label>
                 <input type="text" formControlName="id" placeholder="id" name="id" class="form-control" id="id">
               </div>
-
               <div class="form-group">
                 <label for="detail">Detail</label>
                 <textarea type="textarea" formControlName="detail" placeholder="Details of the log" name="detail" class="form-control" id="detail"></textarea>
               </div>
-
               <div class="form-group">
                 <label for="ip">IP</label>
                 <input type="text" formControlName="ip" name="ip" placeholder="192.168.0.1" class="form-control" id="ip">
               </div>
-
               <div class="form-group">
-                <label>Event</label>
-                <br/>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input formControlName="event" type="radio" id="event0" name="event" class="custom-control-input" [value]=0>
-                  <label class="custom-control-label" for="event0">0</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input formControlName="event" type="radio" id="event2" name="event" class="custom-control-input" [value]=1>
-                  <label class="custom-control-label" for="event2">1</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input formControlName="event" type="radio" id="event3" name="event" class="custom-control-input " [value]=2>
-                  <label class="custom-control-label" for="event3">2</label>
-                </div>
+                <label for="event">Event</label>
+                <input type="number" formControlName="event" placeholder="1000" class="form-control" id="event">
               </div>
             </div>
-
             <div class="col-md-6">
               <div class="form-group">
                 <label for="title">Title</label>

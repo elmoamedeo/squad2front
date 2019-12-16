@@ -18,18 +18,20 @@
               <th>Ip</th>
               <th>Enabled</th>
               <th>Level</th>
+              <th>Environment</th>
               <th>Event</th>
               <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let log of logs">
-              <td>{{log.title}}</td>
-              <td>{{log.detail}}</td>
-              <td>{{log.ip}}</td>
-              <td>{{log.enabled}}</td>
-              <td>{{log.level}}</td>
-              <td>{{log.event}}</td>
+              <td [routerLink]="['/log', log.id]">{{log.title}}</td>
+              <td [routerLink]="['/log', log.id]">{{log.detail}}</td>
+              <td [routerLink]="['/log', log.id]">{{log.ip}}</td>
+              <td [routerLink]="['/log', log.id]">{{log.enabled}}</td>
+              <td [routerLink]="['/log', log.id]">{{log.level}}</td>
+              <td [routerLink]="['/log', log.id]">{{log.environment}}</td>
+              <td [routerLink]="['/log', log.id]">{{log.event}}</td>
               <td>
                 <div class="btn-group">
                   <button class="btn btn-space btn-outline-success" [routerLink]="['/edit-log', log.id]"> Edit</button>
