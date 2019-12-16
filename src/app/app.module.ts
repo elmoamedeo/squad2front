@@ -11,10 +11,8 @@ import { LogDetailComponent } from './log/log-detail/log-detail.component';
 import { LogEditComponent } from './log/log-edit/log-edit.component';
 import { LogComponent } from './log/log-list/log.component';
 import { LoginComponent } from './login/login.component';
-import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { AuthenticationService } from 'src/service/authentication.service';
 import { LogService } from 'src/service/log.service';
-import { UserService } from 'src/service/user.service';
 import { JwtInterceptor } from 'src/_helpers/jwt.interceptor';
 import { ErrorInterceptor } from 'src/_helpers/error.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -26,7 +24,6 @@ import { NavbarComponent } from './navbar/navbar.component';
     LogComponent,
     LogDetailComponent,
     LogEditComponent,
-    UserEditComponent,
     NavbarComponent,
   ],
   imports: [
@@ -45,8 +42,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     
     // Services
     AuthenticationService,
-    LogService,
-    UserService
+    LogService
   ],
   bootstrap: [AppComponent]
 })
