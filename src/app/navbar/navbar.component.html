@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col">
+        <div class="card bg-dark mt-5">
+            <h2 class="card-header text-light font-weight-light mt-2 mb-2">Bem Vindo! Seu token é: {{ token }}
+            <span class="float-right">
+                <button class="btn btn-danger" (click)="logout()" [routerLink]="['/login']"> Logout</button>
+            </span>
+            </h2>
+        </div>
+    </div>
+</div>
