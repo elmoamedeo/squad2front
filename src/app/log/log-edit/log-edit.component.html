@@ -18,42 +18,8 @@
               </div>
 
               <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" formControlName="title" placeholder="Title" name="title" class="form-control" id="title">
-              </div>
-
-              <div class="form-group">
                 <label for="detail">Detail</label>
-                <input type="textarea" formControlName="detail" placeholder="Details of the log" name="detail" class="form-control" id="detail">
-              </div>
-
-              <div class="form-group">
-                <label>Event</label>
-                <br/>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input formControlName="event" type="radio" id="event0" name="event" class="custom-control-input" value="0">
-                  <label class="custom-control-label" for="event0">0</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input formControlName="event" type="radio" id="event2" name="event" class="custom-control-input" value="1">
-                  <label class="custom-control-label" for="event2">1</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input formControlName="event" type="radio" id="event3" name="event" class="custom-control-input " value="2">
-                  <label class="custom-control-label" for="event3">2</label>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="level">Level</label>
-                <input type="text" formControlName="level" placeholder="Level" name="level" class="form-control" id="level">
-              </div>
-
-              <div class="form-group">
-                <label for="environment">Environment</label>
-                <input type="text" formControlName="environment" placeholder="Environment" name="environment" class="form-control" id="environment">
+                <textarea type="textarea" formControlName="detail" placeholder="Details of the log" name="detail" class="form-control" id="detail"></textarea>
               </div>
 
               <div class="form-group">
@@ -62,8 +28,52 @@
               </div>
 
               <div class="form-group">
+                <label>Event</label>
+                <br/>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input formControlName="event" type="radio" id="event0" name="event" class="custom-control-input" [value]=0>
+                  <label class="custom-control-label" for="event0">0</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input formControlName="event" type="radio" id="event2" name="event" class="custom-control-input" [value]=1>
+                  <label class="custom-control-label" for="event2">1</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input formControlName="event" type="radio" id="event3" name="event" class="custom-control-input " [value]=2>
+                  <label class="custom-control-label" for="event3">2</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" formControlName="title" placeholder="Title" name="title" class="form-control" id="title">
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label" for="level">Level</label>
+                <select class="form-control" formControlName="level" name="level">
+                  <option [ngValue]="null" hidden>Selecione uma opção</option>
+                  <option value="W">Warning</option>
+                  <option value="B">Bug</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label" for="environment">Level</label>
+                <select class="form-control" formControlName="environment" name="environment">
+                  <option [ngValue]="null" hidden>Selecione uma opção</option>
+                  <option value="A">Acceptance</option>
+                  <option value="D">Development</option>
+                  <option value="P">Production</option>
+                </select>
+              </div>
+
+              <div class="form-group">
                 <div class="custom-control custom-checkbox custom-control-inline">
-                  <input formControlName="event" type="checkbox" id="enabled" name="enabled" class="custom-control-input" value="0">
+                  <input formControlName="enabled" (change)="checkActiveLogValue($event.target)" type="checkbox" id="enabled" name="enabled" class="custom-control-input">
                   <label class="custom-control-label" for="enabled">Active?</label>
                 </div>
               </div>

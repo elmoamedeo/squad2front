@@ -35,9 +35,9 @@ export class LogEditComponent implements OnInit {
       title: ['', Validators.required],
       detail: ['', Validators.required],
       event: ['', Validators.required],
-      level: ['', Validators.required],
-      environment: ['', Validators.required],
-      enabled: ['', Validators.required],
+      level: [null, Validators.required],
+      environment: [null, Validators.required],
+      enabled: [false, Validators.required],
       ip: ['', Validators.required]
     });
 
@@ -59,33 +59,47 @@ export class LogEditComponent implements OnInit {
   }
 
   private createFromForm(): ILog {
-    return {
-      ...new Log(),
-      id: this.editLogForm.get('id').value,
-      title: this.editLogForm.get('title').value,
-      detail: this.editLogForm.get('detail').value,
-      event: this.editLogForm.get('event').value,
-      level: this.editLogForm.get('level').value,
-      environment: this.editLogForm.get('environment').value,
-      enabled: this.editLogForm.get('enabled').value,
-      ip: this.editLogForm.get('ip').value,
-      token: this.currentUserId
-    };
+    if(this.edit == true){
+      return {
+        ...new Log(),
+        id: this.editLogForm.get('id').value,
+        title: this.editLogForm.get('title').value,
+        detail: this.editLogForm.get('detail').value,
+        event: this.editLogForm.get('event').value,
+        level: this.editLogForm.get('level').value,
+        environment: this.editLogForm.get('environment').value,
+        enabled: this.editLogForm.get('enabled').value,
+        ip: this.editLogForm.get('ip').value,
+        token: this.currentUserId
+      };
+    } else {
+      return {
+        ...new Log(),
+        title: this.editLogForm.get('title').value,
+        detail: this.editLogForm.get('detail').value,
+        event: this.editLogForm.get('event').value,
+        level: this.editLogForm.get('level').value,
+        environment: this.editLogForm.get('environment').value,
+        enabled: this.editLogForm.get('enabled').value,
+        ip: this.editLogForm.get('ip').value,
+        token: this.currentUserId
+      }
+    }
   }
 
-  getLog(id: string) {
+  private getLog(id: string) {
     if(id != 'new') {
       this.logService.getLogById(id)
         .subscribe(data => {
           this.updateForm(data);
       });
-
       this.edit = true;
+    } else {
+      this.edit = false;
     }
-    this.edit = false;
   }
 
-  onSubmit() {
+  private onSubmit() {
     if (this.editLogForm.get('id').value != null) {
       this.logService.updateLog(this.editLogForm.get('id').value, this.createFromForm())
         .subscribe(
@@ -93,12 +107,16 @@ export class LogEditComponent implements OnInit {
             this.router.navigate(['logs']);
         });
     } else {
-      this.logService.createLog(this.editLogForm.value)
+      this.logService.createLog(this.createFromForm())
         .subscribe(
           res => {
             this.router.navigate(['logs']);
         });
     }
+  }
+
+  private checkActiveLogValue(event){
+    event.checked ? this.editLogForm.get('enabled').setValue(true) : this.editLogForm.get('enabled').setValue(false);
   }
 
 }
