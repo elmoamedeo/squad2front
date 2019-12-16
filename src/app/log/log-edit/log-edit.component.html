@@ -2,8 +2,8 @@
   <div class="col">
     <div class="card bg-dark mt-5">
       <h2 class="card-header text-light font-weight-light mt-2 mb-2">
-        <span [hidden]="edit" class="text-center">Create Log</span>
-        <span [hidden]="!edit" class="text-center">Edit Log</span>
+        <span [hidden]="edit" class="text-center">Criar Log</span>
+        <span [hidden]="!edit" class="text-center">Editar Log</span>
       </h2>
       <div class="card-body">
         <form [formGroup]="editLogForm" (ngSubmit)="onSubmit()">
@@ -14,7 +14,7 @@
                 <input type="text" formControlName="id" placeholder="id" name="id" class="form-control" id="id">
               </div>
               <div class="form-group">
-                <label for="detail">Detail</label>
+                <label for="detail">Detalhe</label>
                 <textarea type="textarea" formControlName="detail" placeholder="Details of the log" name="detail" class="form-control" id="detail"></textarea>
               </div>
               <div class="form-group">
@@ -22,17 +22,17 @@
                 <input type="text" formControlName="ip" name="ip" placeholder="192.168.0.1" class="form-control" id="ip">
               </div>
               <div class="form-group">
-                <label for="event">Event</label>
+                <label for="event">Evento</label>
                 <input type="number" formControlName="event" placeholder="1000" class="form-control" id="event">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="title">Title</label>
+                <label for="title">Título</label>
                 <input type="text" formControlName="title" placeholder="Title" name="title" class="form-control" id="title">
               </div>
               <div class="form-group">
-                <label class="form-control-label" for="level">Level</label>
+                <label class="form-control-label" for="level">Nível</label>
                 <select class="form-control" formControlName="level" name="level">
                   <option [ngValue]="null" hidden>Selecione uma opção</option>
                   <option value="W">Warning</option>
@@ -40,18 +40,18 @@
                 </select>
               </div>
               <div class="form-group">
-                <label class="form-control-label" for="environment">Level</label>
+                <label class="form-control-label" for="environment">Ambiente</label>
                 <select class="form-control" formControlName="environment" name="environment">
                   <option [ngValue]="null" hidden>Selecione uma opção</option>
-                  <option value="A">Acceptance</option>
-                  <option value="D">Development</option>
-                  <option value="P">Production</option>
+                  <option value="A">Aceitação</option>
+                  <option value="D">Desenvolvimento</option>
+                  <option value="P">Produção</option>
                 </select>
               </div>
               <div class="form-group">
                 <div class="custom-control custom-checkbox custom-control-inline">
                   <input formControlName="enabled" (change)="checkActiveLogValue($event.target)" type="checkbox" id="enabled" name="enabled" class="custom-control-input">
-                  <label class="custom-control-label" for="enabled">Active?</label>
+                  <label class="custom-control-label" for="enabled">Ativo?</label>
                 </div>
               </div>
             </div>
@@ -59,8 +59,8 @@
         </form>
         <div class="mt-5">
           <button class="btn btn-outline-warning btn-lg" style="margin-right: 0.5%;" [routerLink]="['/logs']">Voltar</button>
-          <button class="btn btn-outline-success btn-lg" [hidden]="edit" (click)="onSubmit()">Create</button>
-          <button class="btn btn-outline-success btn-lg" [hidden]="!edit" (click)="onSubmit()">Update</button>
+          <button class="btn btn-outline-success btn-lg" [hidden]="edit" (click)="onSubmit()">Criar</button>
+          <button class="btn btn-outline-success btn-lg" [hidden]="!edit" (click)="onSubmit()">Editar</button>
         </div>
       </div>
     </div>

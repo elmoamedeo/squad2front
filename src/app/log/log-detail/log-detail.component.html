@@ -2,21 +2,21 @@
     <div class="col">
         <div class="card bg-dark mt-5">
             <h2 class="card-header text-light font-weight-light mt-2 mb-2">
-                <span class="text-center">Log {{ log?.id }} details</span>
+                <span class="text-center">Detalhes do log: {{ log?.id }}</span>
             </h2>
             <div class="card-body">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <h2 class="text-light font-weight-light mt-2 mb-2">Error in IP Address: {{ log?.ip }}</h2>
+                            <h2 class="text-light font-weight-light mt-2 mb-2">Erro no endereço IP: {{ log?.ip }}</h2>
                         </div>
                         <div class="form-group">
-                            <h4 class="text-light font-weight-light mt-2 mb-2">Title:
+                            <h4 class="text-light font-weight-light mt-2 mb-2">Título:
                                 <span> {{ log?.title }}</span>
                             </h4>
                         </div>
                         <div class="form-group">
-                            <h5 class="text-light font-weight-light mt-2 mb-2">Detail:
+                            <h5 class="text-light font-weight-light mt-2 mb-2">Detalhe:
                                 <span> {{ log?.detail }}</span>
                             </h5>
                         </div>
@@ -26,19 +26,19 @@
                             </h4>
                         </div>
                         <div class="form-group">
-                            <h4 class="text-light font-weight-light mt-2 mb-2">Evironment:
-                                <span *ngIf="log?.environment == 'D'"> Development</span>
-                                <span *ngIf="log?.environment == 'P'"> Production</span>
-                                <span *ngIf="log?.environment == 'A'"> Acceptance</span>
+                            <h4 class="text-light font-weight-light mt-2 mb-2">Ambiente:
+                                <span *ngIf="log?.environment == 'A'"> Aceitação</span>
+                                <span *ngIf="log?.environment == 'D'"> Desenvolvimento</span>
+                                <span *ngIf="log?.environment == 'P'"> Produção</span>
                             </h4>
                         </div>
                         <div class="form-group">
-                            <h4 class="text-light font-weight-light mt-2 mb-2">Event:
+                            <h4 class="text-light font-weight-light mt-2 mb-2">Evento:
                                 <span> {{ log?.event }}</span>
                             </h4>
                         </div>
                         <div class="form-group">
-                            <h4 class="text-light font-weight-light mt-2 mb-2">Level:
+                            <h4 class="text-light font-weight-light mt-2 mb-2">Nível:
                                 <span *ngIf="log?.level == 'W'" style="color: red"> Warning</span>
                                 <span *ngIf="log?.level == 'B'" style="color: orange"> Bug</span>
                             </h4>

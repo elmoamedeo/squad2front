@@ -16,7 +16,7 @@
               <input type="text" class="form-control" formControlName="email" id="email" autocomplete="off" placeholder="Email">
             </div>
             <small class="text-danger" *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched">
-              E-mail is required.
+              O Email é obrigatório.
             </small>
           </div>
 
@@ -27,17 +27,17 @@
                   <img src="../../assets/unlock-alt-solid.png"/>
                 </div>
               </div>
-              <input type="password" class="form-control" formControlName="password" id="pwd" autocomplete="off" placeholder="Password">
+              <input type="password" class="form-control" formControlName="password" id="pwd" autocomplete="off" placeholder="Senha">
             </div>
             <small class="text-danger" *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">
-              Password is required.
+              A senha é obrigatória.
             </small>
           </div>
 
           <div>
             <button class="btn btn-success btn-block" [disabled]="loginForm.invalid">Login</button>
             <small *ngIf="invalidLogin" class="text-danger">
-              Invalid credentials.
+              As credenciais oferecidas são inválidas.
             </small>
           </div>
         </form>
