@@ -2,8 +2,8 @@
   <div class="col">
     <div class="card bg-dark mt-5">
       <h2 class="card-header text-light font-weight-light mt-2 mb-2">
-        <span [hidden]="edit" class="text-center">Criar Log</span>
-        <span [hidden]="!edit" class="text-center">Editar Log</span>
+        <span [hidden]="edit" class="text-center">Criar Registro</span>
+        <span [hidden]="!edit" class="text-center">Editar Registro</span>
       </h2>
       <div class="card-body">
         <form [formGroup]="editLogForm" (ngSubmit)="onSubmit()">
@@ -11,11 +11,11 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="detail">ID</label>
-                <input type="text" formControlName="id" placeholder="id" name="id" class="form-control" id="id">
+                <input type="text" formControlName="id" placeholder="ID" name="id" class="form-control" id="id">
               </div>
               <div class="form-group">
                 <label for="detail">Detalhe</label>
-                <textarea type="textarea" formControlName="detail" placeholder="Details of the log" name="detail" class="form-control" id="detail"></textarea>
+                <textarea type="textarea" formControlName="detail" placeholder="Detalhes do registro" name="detail" class="form-control" id="detail"></textarea>
               </div>
               <div class="form-group">
                 <label for="ip">IP</label>
@@ -29,7 +29,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="title">Título</label>
-                <input type="text" formControlName="title" placeholder="Title" name="title" class="form-control" id="title">
+                <input type="text" formControlName="title" placeholder="Erro no servidor" name="title" class="form-control" id="title">
               </div>
               <div class="form-group">
                 <label class="form-control-label" for="level">Nível</label>

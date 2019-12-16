@@ -3,9 +3,9 @@
   <div class="col">
     <div class="card bg-dark mt-5">
       <h2 class="card-header text-light font-weight-light mt-2 mb-2">
-        <span>Lista de Logs</span>
+        <span>Lista de Registros</span>
         <span class="float-right">
-          <button class="btn btn-danger" style="width:100px" (click)="goToAddLog()"> Add Log</button>
+          <button class="btn btn-danger" style="width:100px" (click)="goToAddLog()"> Adicionar Registro</button>
         </span>
       </h2>
       <div class="card-body mt-4">
@@ -28,14 +28,14 @@
               <td [routerLink]="['/log', log.id]">{{log.title}}</td>
               <td [routerLink]="['/log', log.id]">{{log.detail}}</td>
               <td [routerLink]="['/log', log.id]">{{log.ip}}</td>
-              <td [routerLink]="['/log', log.id]">{{log.enabled}}</td>
+              <td [routerLink]="['/log', log.id]">{{log.enabled === true ? 'Sim' : 'Não'}}</td>
               <td [routerLink]="['/log', log.id]">{{log.level}}</td>
               <td [routerLink]="['/log', log.id]">{{log.environment}}</td>
               <td [routerLink]="['/log', log.id]">{{log.event}}</td>
               <td>
                 <div class="btn-group">
-                  <button class="btn btn-space btn-outline-success" [routerLink]="['/edit-log', log.id]"> Edit</button>
-                  <button class="btn btn-space btn-outline-danger" (click)="deleteLog(log)"> Delete</button>
+                  <button class="btn btn-space btn-outline-success" [routerLink]="['/edit-log', log.id]"> Editar</button>
+                  <button class="btn btn-space btn-outline-danger" (click)="deleteLog(log)"> Deletar</button>
                 </div>
               </td>
             </tr>
