@@ -99,7 +99,7 @@ export class LogEditComponent implements OnInit {
     }
   }
 
-  private onSubmit() {
+  onSubmit() {
     if (this.editLogForm.get('id').value != null) {
       this.logService.updateLog(this.editLogForm.get('id').value, this.createFromForm())
         .subscribe(
@@ -115,7 +115,7 @@ export class LogEditComponent implements OnInit {
     }
   }
 
-  private checkActiveLogValue(event){
+  checkActiveLogValue(event){
     event.checked ? this.editLogForm.get('enabled').setValue(true) : this.editLogForm.get('enabled').setValue(false);
   }
 
