@@ -55,7 +55,7 @@
                       <img src="../../assets/unlock-alt-solid.svg"/>
                     </div>
                   </div>
-                  <input type="password" class="form-control" formControlName="passwordConfirm" id="pwd" autocomplete="off" placeholder="Senha">
+                  <input type="password" class="form-control" formControlName="passwordConfirm" id="pwd" autocomplete="off" placeholder="Confirme a sua senha">
                 </div>
                 <small class="text-danger" *ngIf="registerForm.controls['passwordConfirm'].hasError('required') && registerForm.controls['passwordConfirm'].touched">
                     A senha é obrigatória.
