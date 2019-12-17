@@ -16,7 +16,10 @@
               <input type="text" class="form-control" formControlName="email" id="email" autocomplete="off" placeholder="E-mail">
             </div>
             <small class="text-danger" *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched">
-              O Email é obrigatório.
+              O E-mail é obrigatório.
+            </small>
+            <small class="text-danger" *ngIf="loginForm.controls['email'].hasError('email') && loginForm.controls['email'].touched">
+              O Email fornecido não é válido.
             </small>
           </div>
 
