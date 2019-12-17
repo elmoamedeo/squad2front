@@ -16,6 +16,8 @@ import { LogService } from 'src/service/log.service';
 import { JwtInterceptor } from 'src/_helpers/jwt.interceptor';
 import { ErrorInterceptor } from 'src/_helpers/error.interceptor';
 import { NavbarComponent } from './navbar/navbar.component';
+import { RegisterComponent } from './register/register.component';
+import { UserService } from 'src/service/user.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     LogDetailComponent,
     LogEditComponent,
     NavbarComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     
     // Services
     AuthenticationService,
+    UserService,
     LogService
   ],
   bootstrap: [AppComponent]

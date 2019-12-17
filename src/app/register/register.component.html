@@ -1,0 +1,85 @@
+<div class="row justify-content-center" style="padding-top: 20%">
+    <div class="col-md-5">
+      <div class="card text-white bg-dark shadow p-4">
+        <div class="card-body">
+          <h2 class="card-title text-center font-weight-light">REGISTRAR</h2>
+          <br/>
+  
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="mb-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <img src="../../assets/user-solid.svg"/>
+                  </div>
+                </div>
+                <input type="text" class="form-control" formControlName="name" id="email" autocomplete="off" placeholder="Nome">
+              </div>
+              <small class="text-danger" *ngIf="registerForm.controls['name'].hasError('required') && registerForm.controls['name'].touched">
+                O Nome é obrigatório.
+              </small>
+            </div>
+
+            <div class="mb-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <img src="../../assets/envelope-solid.svg"/>
+                  </div>
+                </div>
+                <input type="text" class="form-control" formControlName="email" id="email" autocomplete="off" placeholder="E-mail">
+              </div>
+              <small class="text-danger" *ngIf="registerForm.controls['email'].hasError('required') && registerForm.controls['email'].touched">
+                O Email é obrigatório.
+              </small>
+            </div>
+  
+            <div class="mb-4">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <img src="../../assets/unlock-alt-solid.svg"/>
+                  </div>
+                </div>
+                <input type="password" class="form-control" formControlName="password" id="pwd" autocomplete="off" placeholder="Senha">
+              </div>
+              <small class="text-danger" *ngIf="registerForm.controls['password'].hasError('required') && registerForm.controls['password'].touched">
+                A senha é obrigatória.
+              </small>
+            </div>
+
+            <div class="mb-4">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <img src="../../assets/unlock-alt-solid.svg"/>
+                    </div>
+                  </div>
+                  <input type="password" class="form-control" formControlName="passwordConfirm" id="pwd" autocomplete="off" placeholder="Senha">
+                </div>
+                <small class="text-danger" *ngIf="registerForm.controls['passwordConfirm'].hasError('required') && registerForm.controls['passwordConfirm'].touched">
+                    A senha é obrigatória.
+                </small>
+                <small class="text-danger" 
+                *ngIf="registerForm.controls['password'].value != registerForm.controls['passwordConfirm'].value && registerForm.controls['passwordConfirm'].touched">
+                    As senhas não coincidem.
+                </small>
+              </div>
+  
+            <div>
+              <button class="btn btn-success btn-block" [disabled]="registerForm.invalid || registerForm.controls['password'].value != registerForm.controls['passwordConfirm'].value">Criar</button>
+              <small *ngIf="invalidRegister" class="text-danger">
+                Este e-mail já está sendo utilizado.
+              </small>
+            </div>
+            <br>
+            <div>
+              <button class="btn btn-light btn-block" [routerLink]="['/login']">Já possui uma conta? Faça o login.</button>
+            </div>
+          </form>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  

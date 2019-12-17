@@ -22,15 +22,17 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    this.authenticationService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value).subscribe(res => {
-      this.router.navigate(['/logs']);
+    this.authenticationService.login(this.loginForm.controls.email.value.toLowerCase(), 
+                                    this.loginForm.controls.password.value.toLowerCase())
+      .subscribe(res => {
+        this.router.navigate(['/logs']);
     }, (err) => {
+      this.invalidLogin = true;
       console.log(err);
     });
   }
 
   ngOnInit() {
-    window.localStorage.removeItem('token');
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required])],
       password: ['', Validators.required]

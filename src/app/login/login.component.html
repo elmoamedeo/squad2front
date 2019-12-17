@@ -10,10 +10,10 @@
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <img src="../../assets/envelope-solid.png"/>
+                  <img src="../../assets/envelope-solid.svg"/>
                 </div>
               </div>
-              <input type="text" class="form-control" formControlName="email" id="email" autocomplete="off" placeholder="Email">
+              <input type="text" class="form-control" formControlName="email" id="email" autocomplete="off" placeholder="E-mail">
             </div>
             <small class="text-danger" *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched">
               O Email é obrigatório.
@@ -24,7 +24,7 @@
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text">
-                  <img src="../../assets/unlock-alt-solid.png"/>
+                  <img src="../../assets/unlock-alt-solid.svg"/>
                 </div>
               </div>
               <input type="password" class="form-control" formControlName="password" id="pwd" autocomplete="off" placeholder="Senha">
@@ -39,6 +39,10 @@
             <small *ngIf="invalidLogin" class="text-danger">
               As credenciais oferecidas são inválidas.
             </small>
+          </div>
+          <br>
+          <div>
+            <button class="btn btn-light btn-block" [routerLink]="['/register']">Cadastrar novo usuário.</button>
           </div>
         </form>
 
